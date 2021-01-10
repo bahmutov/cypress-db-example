@@ -1,14 +1,14 @@
 {
-  "name": "objection-example-koa",
-  "version": "2.0.0",
-  "description": "Objection.js koa example",
-  "main": "app.js",
+  "name": "cypress-db-example",
+  "version": "0.0.0-development",
+  "description": "Example that resets the database before every spec, queries the database from the test",
+  "private": true,
   "scripts": {
     "migrate": "knex migrate:latest",
     "start": "npm run migrate && node app"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=12.0.0"
   },
   "author": "Sami Koskimäki",
   "license": "MIT",
