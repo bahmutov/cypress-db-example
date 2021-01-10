@@ -5,7 +5,10 @@
   "private": true,
   "scripts": {
     "migrate": "knex migrate:latest",
-    "start": "npm run migrate && node app"
+    "start": "npm run migrate && node app",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "dev": "start-test 8641 cy:open"
   },
   "engines": {
     "node": ">=12.0.0"
@@ -20,5 +23,9 @@
     "koa-router": "^7.4.0",
     "objection": "^2.1.0",
     "sqlite3": "^4.1.0"
+  },
+  "devDependencies": {
+    "cypress": "6.2.1",
+    "start-server-and-test": "1.11.7"
   }
 }

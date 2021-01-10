@@ -4,6 +4,11 @@ const Person = require('./models/Person')
 const Movie = require('./models/Movie')
 
 module.exports = (router) => {
+  // utility route for pinging server to know when it is working
+  router.get('/', async ctx => {
+    ctx.body = 'Working'
+  })
+
   /**
    * Create a new Person.
    *
