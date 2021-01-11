@@ -1,0 +1,39 @@
+{
+  "firstName": "Matt",
+  "lastName": "Damon",
+  "age": 43,
+
+  "parent": {
+    "firstName": "Kent",
+    "lastName": "Damon",
+    "age": 70
+  },
+
+  "pets": [
+    {
+      "name": "Doggo",
+      "species": "dog"
+    },
+    {
+      "name": "Kat",
+      "species": "cat"
+    }
+  ],
+
+  "movies": [
+    {
+      "name": "The Martian"
+    },
+    {
+      "name": "Good Will Hunting"
+    }
+  ],
+
+  "children": [
+    {
+      "firstName": "Isabella",
+      "lastName": "Damon",
+      "age": 13
+    }
+  ]
+}
