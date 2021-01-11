@@ -1,3 +1,4 @@
+const { expect } = require('chai')
 const Knex = require('knex')
 const knexConfig = require('../../knexfile')
 const { Model } = require('objection')
@@ -14,12 +15,11 @@ module.exports = (on, config) => {
       console.log('reset People table')
       return Person.query().truncate()
     },
-    findPerson(id) {
-      if (typeof id !== 'number') {
-        throw new Error('Invalid person id')
-      }
+    async findPerson(id) {
+      expect(id, 'valid id').to.be.a('number').above(0)
       console.log('looking for person with id %d', id)
-      return Person.query().findById(id)
+      const p = await Person.query().findById(id)
+      return p || null
     },
   })
 }
