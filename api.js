@@ -10,6 +10,12 @@ module.exports = (router) => {
     ctx.body = 'Working'
   })
 
+  if (global.__coverage__) {
+    router.get('/__coverage__', async (ctx) => {
+      ctx.body = { coverage: global.__coverage__ }
+    })
+  }
+
   /**
    * Create a new Person.
    *

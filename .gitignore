@@ -15,3 +15,5 @@ npm-debug.log*
 /**/.vuepress/dist
 example.db
 cypress/videos
+.nyc_output
+coverage

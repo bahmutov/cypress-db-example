@@ -32,6 +32,8 @@ const onBeforeSpec = async (spec) => {
  * @type {Cypress.PluginConfig}
  */
 module.exports = (on, config) => {
+  require('@cypress/code-coverage/task')(on, config)
+
   // see https://on.cypress.io/before-spec-api
   on('before:spec', onBeforeSpec)
 
@@ -71,4 +73,8 @@ module.exports = (on, config) => {
       return query.findOne({ firstName, lastName })
     },
   })
+
+  // IMPORTANT to return the config object
+  // with the any changed environment variables
+  return config
 }
