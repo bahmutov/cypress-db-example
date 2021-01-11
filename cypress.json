@@ -2,5 +2,6 @@
   "baseUrl": "http://localhost:8641",
   "fixturesFolder": false,
   "supportFile": false,
-  "nodeVersion": "system"
+  "nodeVersion": "system",
+  "$schema": "https://on.cypress.io/cypress.schema.json"
 }
