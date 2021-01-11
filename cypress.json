@@ -2,5 +2,11 @@
   "baseUrl": "http://localhost:8641",
   "nodeVersion": "system",
   "$schema": "https://on.cypress.io/cypress.schema.json",
-  "experimentalRunEvents": true
+  "experimentalRunEvents": true,
+  "env": {
+    "codeCoverage": {
+      "url": "http://localhost:8641/__coverage__",
+      "expectBackendCoverageOnly": true
+    }
+  }
 }

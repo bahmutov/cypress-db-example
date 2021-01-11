@@ -8,6 +8,12 @@ The tests also show how to set up the data before the spec runs, both in the int
 
 We also use [Chai](https://www.chaijs.com/) assertions inside the plugins file to validate the data.
 
+We collect the backend code coverage following the instructions in [cypress-io/code-coverage](https://github.com/cypress-io/code-coverage). After each run you can find the reports in the "coverage" folder.
+
+![Coverage](images/coverage.png)
+
+For more information about the backend code coverage, read the blog post [Backend Code Coverage from Cypress API tests](https://glebbahmutov.com/blog/backend-coverage/)
+
 [ci image]: https://github.com/bahmutov/cypress-db-example/workflows/ci/badge.svg?branch=main
 [ci url]: https://github.com/bahmutov/cypress-db-example/actions
 
