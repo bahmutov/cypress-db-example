@@ -14,3 +14,4 @@ npm-debug.log*
 /**/package-lock.json
 /**/.vuepress/dist
 example.db
+cypress/videos

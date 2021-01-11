@@ -1,7 +1,6 @@
 {
   "baseUrl": "http://localhost:8641",
-  "fixturesFolder": false,
-  "supportFile": false,
   "nodeVersion": "system",
-  "$schema": "https://on.cypress.io/cypress.schema.json"
+  "$schema": "https://on.cypress.io/cypress.schema.json",
+  "experimentalRunEvents": true
 }

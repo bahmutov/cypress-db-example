@@ -2,10 +2,11 @@
 
 const Person = require('./models/Person')
 const Movie = require('./models/Movie')
+const { insertPersons } = require('./utils')
 
 module.exports = (router) => {
   // utility route for pinging server to know when it is working
-  router.get('/', async ctx => {
+  router.get('/', async (ctx) => {
     ctx.body = 'Working'
   })
 
@@ -18,16 +19,7 @@ module.exports = (router) => {
    * `insert(ctx.request.body)`.
    */
   router.post('/persons', async (ctx) => {
-    // insertGraph can run multiple queries. It's a good idea to
-    // run it inside a transaction.
-    const insertedGraph = await Person.transaction(async (trx) => {
-      const insertedGraph = await Person.query(trx)
-        // For security reasons, limit the relations that can be inserted.
-        .allowGraph('[pets, children.[pets, movies], movies, parent]')
-        .insertGraph(ctx.request.body)
-
-      return insertedGraph
-    })
+    const insertedGraph = await insertPersons(ctx.request.body)
 
     ctx.body = insertedGraph
   })
@@ -74,7 +66,9 @@ module.exports = (router) => {
     if (ctx.query.withGraph) {
       query
         // For security reasons, limit the relations that can be fetched.
-        .allowGraph('[pets, parent, children.[pets, movies.actors], movies.actors.pets]')
+        .allowGraph(
+          '[pets, parent, children.[pets, movies.actors], movies.actors.pets]',
+        )
         .withGraphFetched(ctx.query.withGraph)
     }
 
@@ -100,7 +94,9 @@ module.exports = (router) => {
    * Update a single Person.
    */
   router.patch('/persons/:id', async (ctx) => {
-    const numUpdated = await Person.query().findById(ctx.params.id).patch(ctx.request.body)
+    const numUpdated = await Person.query()
+      .findById(ctx.params.id)
+      .patch(ctx.request.body)
 
     ctx.body = {
       success: numUpdated == 1,
@@ -124,7 +120,9 @@ module.exports = (router) => {
   router.post('/persons/:id/children', async (ctx) => {
     const personId = parseInt(ctx.params.id)
 
-    const child = await Person.relatedQuery('children').for(personId).insert(ctx.request.body)
+    const child = await Person.relatedQuery('children')
+      .for(personId)
+      .insert(ctx.request.body)
 
     ctx.body = child
   })
@@ -159,7 +157,10 @@ module.exports = (router) => {
       // We could also achieve this using joins, but subqueries are often
       // easier to deal with than joins since they don't interfere with
       // the rest of the query.
-      const movieSubquery = Person.relatedQuery('movies').where('name', ctx.query.actorInMovie)
+      const movieSubquery = Person.relatedQuery('movies').where(
+        'name',
+        ctx.query.actorInMovie,
+      )
 
       query.whereExists(movieSubquery)
     }
@@ -173,7 +174,9 @@ module.exports = (router) => {
   router.post('/persons/:id/pets', async (ctx) => {
     const personId = parseInt(ctx.params.id)
 
-    const pet = await Person.relatedQuery('pets').for(personId).insert(ctx.request.body)
+    const pet = await Person.relatedQuery('pets')
+      .for(personId)
+      .insert(ctx.request.body)
 
     ctx.body = pet
   })
