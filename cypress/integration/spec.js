@@ -1,6 +1,10 @@
 /// <reference types="cypress" />
 
 describe('Movie database', () => {
+  beforeEach(() => {
+    cy.task('resetPeopleTable')
+  })
+
   it('starts with an empty list', () => {
     cy.request('/persons').its('body').should('deep.equal', [])
   })
