@@ -14,5 +14,12 @@ module.exports = (on, config) => {
       console.log('reset People table')
       return Person.query().truncate()
     },
+    findPerson(id) {
+      if (typeof id !== 'number') {
+        throw new Error('Invalid person id')
+      }
+      console.log('looking for person with id %d', id)
+      return Person.query().findById(id)
+    },
   })
 }

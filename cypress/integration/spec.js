@@ -24,4 +24,32 @@ describe('Movie database', () => {
         lastName: 'Smith',
       })
   })
+
+  it('updates Person information', () => {
+    cy.request('POST', '/persons', {
+      firstName: 'Joe',
+      lastName: 'Smith',
+    })
+      .its('body.id')
+      .then((id) => {
+        expect(id, 'created id').to.be.a('number')
+        cy.request({
+          method: 'PATCH',
+          url: `/persons/${id}`,
+          body: {
+            lastName: 'Pesci',
+          },
+        })
+          .its('body')
+          .should('deep.equal', {
+            success: true,
+          })
+        // how to check the full record with id: 1?
+        cy.task('findPerson', id).should('include', {
+          id,
+          firstName: 'Joe',
+          lastName: 'Pesci',
+        })
+      })
+  })
 })
