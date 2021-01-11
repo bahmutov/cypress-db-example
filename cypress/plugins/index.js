@@ -56,5 +56,9 @@ module.exports = (on, config) => {
       const p = await Person.query().findById(id)
       return p || null
     },
+
+    findPersonByName({ firstName, lastName }) {
+      return Person.query().findOne({ firstName, lastName })
+    },
   })
 }
