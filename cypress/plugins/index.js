@@ -57,8 +57,18 @@ module.exports = (on, config) => {
       return p || null
     },
 
-    findPersonByName({ firstName, lastName }) {
-      return Person.query().findOne({ firstName, lastName })
+    findPersonByName({ firstName, lastName, withGraph }) {
+      const query = Person.query()
+      if (withGraph) {
+        query
+          // For security reasons, limit the relations that can be fetched.
+          .allowGraph(
+            '[pets, parent, children.[pets, movies.actors], movies.actors.pets]',
+          )
+          .withGraphFetched(withGraph)
+      }
+
+      return query.findOne({ firstName, lastName })
     },
   })
 }
