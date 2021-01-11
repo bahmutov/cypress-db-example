@@ -1,5 +1,25 @@
 # Cypress DB example [![ci status][ci image]][ci url]
 
+## Install and use
+
+```
+npm install
+```
+
+To run all Cypress specs
+
+```
+npm run local
+```
+
+To start the API server and open Cypress for local interactive mode
+
+```
+npm run dev
+```
+
+## Notes
+
 The application in [app.js](app.js) and [api.js](api.js) uses [Objection.js](https://github.com/Vincit/objection.js) to provide REST API on top of Sqlite3 database.
 
 The Cypress spec files in [cypress/integration](cypress/integration) test the app by executing `cy.request` calls. To reset the database data and query the tables directly, we can use `cy.task` commands inside [cypress/plugins/index.js](cypress/plugins/index.js) file.
